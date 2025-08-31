@@ -1,4 +1,5 @@
-module GoService
+module github.com/Kishinskiy/GoBlog
+
 
 go 1.24
 
