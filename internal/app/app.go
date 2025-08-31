@@ -1,14 +1,24 @@
 package app
 
 import (
+	"GoService/internal/config"
+	"GoService/internal/handler"
 	"context"
 	"log/slog"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func Run(ctx context.Context) error {
+	cfg := config.NewConfig()
+
+	r := chi.NewRouter()
+	handler.RegisterRouters(r)
+
 	s := http.Server{
-		Addr: ":8080",
+		Addr:    cfg.ServerAddr,
+		Handler: r,
 	}
 
 	go func() {
@@ -17,7 +27,7 @@ func Run(ctx context.Context) error {
 		s.Shutdown(ctx)
 	}()
 
-	slog.Info("starting server")
+	slog.Info("starting server", slog.String("addr", cfg.ServerAddr))
 	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		return err
 	}

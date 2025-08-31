@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	go build -o ./bin/myapp cmd/myapp/main.go
+	go build -o ./bin/myapp cmd/goservice/main.go
 
 .PHONY: run
 run: build
