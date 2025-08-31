@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoService/internal/app"
+	"github.com/Kishinskiy/GoBlog/app"
 	"context"
 	"log"
 	"os"
